@@ -12,7 +12,7 @@ let input = fs.readFileSync('/dev/stdin').toString().trim().split('\n');
 
 input.forEach(element => {let result = element.split(' '); 
   if(Number(result[0]) + Number(result[1]) == 0){
-    null;
+    null; //0 0이 들어오면 그냥 null을 줘버림 
   }
   else{
   console.log(Number(result[0]) + Number(result[1])) }
