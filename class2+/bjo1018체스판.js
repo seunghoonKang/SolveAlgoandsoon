@@ -23,3 +23,5 @@ for(let i=1; i<=ColumnSize; i++){
   chess.push(row); //그걸 미리 만들어놓은 배열 에 넣어둠
 }
 
+
+//모르겠당
