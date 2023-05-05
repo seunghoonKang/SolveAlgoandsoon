@@ -6,36 +6,16 @@ let [testsNum, ...tests] = fs
   .split("\n")
   .map(Number);
 
-let quarter = 25;
-let dime = 10;
-let nickel = 5;
-let penny = 1;
-let needQuater = 0;
-let needDime = 0;
-let needNickel = 0;
-let needPenny = 0;
+const coins = [25, 10, 5, 1];
 
 for (let i = 0; i < testsNum; i++) {
   let change = tests[i];
-  if (Math.floor(change / quarter) >= 1) {
-    needQuater = Math.floor(change / quarter);
-    change -= quarter * needQuater;
+  let coinCounts = [0, 0, 0, 0]; // quarter, dime, nickel, penny
+  for (let j = 0; j < coins.length; j++) {
+    if (change >= coins[j]) {
+      coinCounts[j] = Math.floor(change / coins[j]);
+      change -= coins[j] * coinCounts[j];
+    }
   }
-  if (Math.floor(change / dime) >= 1 && change > 0) {
-    needDime = Math.floor(change / dime);
-    change -= dime * needDime;
-  }
-  if (Math.floor(change / nickel) >= 1 && change > 0) {
-    needNickel = Math.floor(change / nickel);
-    change -= nickel * needNickel;
-  }
-  if (Math.floor(change / penny) >= 1 && change > 0) {
-    needPenny = Math.floor(change / penny);
-    change -= penny * needPenny;
-  }
-  console.log(needQuater, needDime, needNickel, needPenny);
-  needQuater = 0;
-  needDime = 0;
-  needNickel = 0;
-  needPenny = 0;
+  console.log(coinCounts[0], coinCounts[1], coinCounts[2], coinCounts[3]);
 }
