@@ -2,29 +2,30 @@ const path = process.platform === "linux" ? "/dev/stdin" : "input.txt";
 const fs = require("fs");
 let input = fs.readFileSync(path).toString().trim().split("\n");
 
-for (let i = 0; i < input.length; i++) {
-  if (input[i] === ".") break;
-  let arr = [];
-  let isSame = true;
-  for (let j = 0; j < input[i].length; j++) {
-    if (input[i][j] === "(" || input[i][j] === "[") {
-      arr.push(input[i][j]);
-    } else if (input[i][j] === ")") {
-      if (arr[arr.length - 1] === "(") {
-        arr.pop();
+function isBalanced(str) {
+  const stack = [];
+  for (let i = 0; i < str.length; i++) {
+    if (str[i] === "(" || str[i] === "[") {
+      stack.push(str[i]);
+    } else if (str[i] === ")") {
+      if (stack[stack.length - 1] === "(") {
+        stack.pop();
       } else {
-        isSame = false;
-        break;
+        return "no";
       }
-    } else if (input[i][j] === "]") {
-      if (arr[arr.length - 1] === "[") {
-        arr.pop();
+    } else if (str[i] === "]") {
+      if (stack[stack.length - 1] === "[") {
+        stack.pop();
       } else {
-        isSame = false;
-        break;
+        return "no";
       }
     }
+    console.log(stack);
   }
-  if (arr.length > 0 || !isSame) console.log("no");
-  else console.log("yes");
+  return stack.length > 0 ? "no" : "yes";
+}
+
+for (let i = 0; i < input.length; i++) {
+  if (input[i] === ".") break;
+  console.log(isBalanced(input[i]));
 }
